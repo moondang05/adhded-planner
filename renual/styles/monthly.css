@@ -1,78 +1,7 @@
-/* 기본 리셋 */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+/* ====================== 월간(Monthly) 뷰 전용 스타일 ====================== */
 
-/* 🌟 오켘말랑 폰트 불러오기 */
-@font-face {
-    font-family: 'OkMallangB';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2603-1@1.0/OkMallangB-Regular.woff2') format('woff2');
-    font-weight: normal;
-    font-display: swap;
-}
-
-/* 🌟 온글잎 바람 폰트 불러오기 */
-@font-face {
-    font-family: 'OngleIpSeaBreeze';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2510-1@1.0/Ownglyph_the_sea_breeze-Rg.woff2') format('woff2');
-    font-weight: normal;
-    font-display: swap;
-}
-
-:root {
-    --bg-color: #F5F1E7;
-    --line-color: #1A2B4C;
-    --point-color: #E74C3C;
-    --todo-cell-size: 5.47mm;
-}
-
-/* 테마 클래스들 */
-.theme-green {
-    --line-color: #2D5A27;
-    --point-color: #F4A261;
-}
-
-.theme-purple {
-    --line-color: #6A4C93;
-    --point-color: #E76F51;
-}
-
-.theme-pink {
-    --line-color: #D90429;
-    --point-color: #FFB703;
-}
-
-.theme-yellow {
-    --line-color: #C49428;
-    --point-color: #2A9D8F;
-}
-
-.theme-blue {
-    --line-color: #1D3557;
-    --point-color: #E63946;
-}
-
-.theme-orange {
-    --line-color: #F4A261;
-    --point-color: #264653;
-}
-
-body {
-    background-color: transparent;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-width: 210mm;
-    min-height: 148mm;
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    transition: background-color 0.5s;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-}
-
-/* 🌟 달력 전체 컨테이너 */
+/* 🌟 달력 전체 컨테이너 (미리보기 영역 안에서도 실제 인쇄 크기(210x148mm)를 그대로 유지하고,
+   view-controller.js가 transform: scale로 축소/중앙 정렬한다) */
 .calendar-wrapper {
     background-color: var(--bg-color);
     width: 210mm;
@@ -80,7 +9,7 @@ body {
     padding: 8mm;
     box-shadow: none;
     position: relative;
-    /* 오버레이 기준점 */
+    --todo-cell-size: 5.47mm;
 }
 
 /* 상단 헤더 */
@@ -93,7 +22,6 @@ body {
     color: var(--line-color);
     position: relative;
     z-index: 2;
-    /* 텍스처 위로 올리기 */
 }
 
 .monthly-goal {
@@ -164,7 +92,6 @@ body {
     z-index: 2;
 }
 
-/* 폰트 적용 부분 */
 .cal-month {
     font-family: 'OkMallangB', sans-serif;
     font-size: 24mm;
@@ -215,7 +142,6 @@ body {
     border-left: 1.5px solid var(--line-color);
     position: relative;
     z-index: 2;
-    /* 텍스처 위로 올리기 */
     border-radius: 4px;
     overflow: hidden;
 }
@@ -321,29 +247,21 @@ body {
     color: #b5b1a5;
 }
 
-/* 🌟 요일(MO, TU, WE...) 칸 (레이아웃 깨짐 완벽 해결!) */
+/* 🌟 요일(MO, TU, WE...) 칸 */
 .cal-cell.weekday {
     background-color: transparent;
     color: var(--line-color);
     height: auto;
     aspect-ratio: auto;
-    /* 정사각형 고정 해제 (그리드 폭발 방지) */
-
     justify-content: center;
     align-items: center;
     padding: 0;
     padding-right: 4mm;
-    /* 블록 두께만큼 텍스트를 왼쪽으로 밀어서 정중앙 배치 */
-
     font-size: 3mm;
     font-weight: 800;
     text-transform: uppercase;
-
-    /* 🌟 물리적인 뼈대(테두리)는 무조건 1.5px로 유지해서 레이아웃을 보호! */
     border-right: 1.5px solid var(--line-color);
     border-bottom: 1.5px solid var(--line-color);
-
-    /* 🌟 CSS 눈속임: 안쪽으로 그림자를 쏴서 14px 두께의 가짜 블록을 만듦! */
     box-shadow: inset -4mm 0 0 0 var(--line-color);
 }
 
@@ -380,16 +298,13 @@ body {
     font-size: 0.55em;
 }
 
-/* 혹시 달력 내부 컨테이너에도 스크롤이 걸려있다면 같이 없애줘 */
 ::-webkit-scrollbar {
     display: none;
 }
 
-/* --- [새로 추가] 점들이 담길 컨테이너 --- */
 .dot-container {
     display: flex;
     flex-wrap: wrap;
-    /* 🌟 점이 많아지면 자동으로 다음 줄로 넘어가서 안 겹침 */
     gap: 3px;
     justify-content: center;
     align-items: center;
@@ -397,16 +312,9 @@ body {
     pointer-events: none;
 }
 
-/* --- [새로 추가] 참가자별 색상 점 --- */
 .status-dot {
     width: 3mm;
     height: 3mm;
     border-radius: 50%;
     border: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-/* A5 가로 인쇄 규격 */
-@page {
-    size: A5 landscape;
-    margin: 0;
 }

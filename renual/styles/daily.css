@@ -1,73 +1,4 @@
-/* 기본 리셋 */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-@font-face {
-    font-family: 'OkMallangB';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2603-1@1.0/OkMallangB-Regular.woff2') format('woff2');
-    font-weight: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'OngleIpSeaBreeze';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2510-1@1.0/Ownglyph_the_sea_breeze-Rg.woff2') format('woff2');
-    font-weight: normal;
-    font-display: swap;
-}
-
-:root {
-    --bg-color: #F5F1E7;
-    --line-color: #1A2B4C;
-    --point-color: #E74C3C;
-    --todo-columns: 18mm 1fr 28mm;
-}
-
-.theme-green {
-    --line-color: #2D5A27;
-    --point-color: #F4A261;
-}
-
-.theme-purple {
-    --line-color: #6A4C93;
-    --point-color: #E76F51;
-}
-
-.theme-pink {
-    --line-color: #D90429;
-    --point-color: #FFB703;
-}
-
-.theme-yellow {
-    --line-color: #C49428;
-    --point-color: #2A9D8F;
-}
-
-.theme-blue {
-    --line-color: #1D3557;
-    --point-color: #E63946;
-}
-
-.theme-orange {
-    --line-color: #F4A261;
-    --point-color: #264653;
-}
-
-body {
-    background-color: transparent;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-width: 210mm;
-    min-height: 148mm;
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    transition: background-color 0.5s;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-}
+/* ====================== 일간(Daily) 뷰 전용 스타일 ====================== */
 
 .daily-wrapper {
     width: 210mm;
@@ -75,6 +6,7 @@ body {
     padding: 8mm;
     background: var(--bg-color);
     position: relative;
+    --todo-columns: 18mm 1fr 28mm;
 }
 
 .daily-header {
@@ -89,14 +21,6 @@ body {
 .titles {
     display: flex;
     flex-direction: column;
-    
-}
-
-.eyebrow {
-    margin-bottom: 1mm;
-    font-size: 3mm;
-    letter-spacing: 0.6mm;
-    color: var(--line-color);
 }
 
 .eyebrow-right {
@@ -160,7 +84,8 @@ body {
     height: 100%;
 }
 
-.date {
+/* 헤더의 .date(상단 DATE 표시)와 이름이 겹치지 않도록 daily 뷰 전용 이름 사용 */
+.daily-day-date {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -172,7 +97,7 @@ body {
     padding-top: 1mm;
 }
 
-.date.highlight-date {
+.daily-day-date.highlight-date {
     color: var(--point-color);
 }
 
@@ -231,7 +156,6 @@ body {
 /* 🌟 빈칸(일요일 하단)을 채울 추가 박스 스타일 */
 .extra-box {
     width: 100%;
-    /* date 넓이까지 포함해서 가득 채움 */
     height: 100%;
     border: 1.5px solid var(--point-color);
     border-radius: 4px;
@@ -244,7 +168,6 @@ body {
     height: calc(7mm - 1.5px);
     display: grid;
     grid-template-columns: 1fr 1fr;
-    /* 정중앙 5:5 분할 */
     align-items: center;
     background: var(--point-color);
     color: #fff;
@@ -262,53 +185,9 @@ body {
 .extra-box-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    /* 정중앙 5:5 분할 */
     height: calc(100% - (7mm - 1.5px));
-    /* 타이틀 아래 꽉 채우기 */
 }
 
 .extra-col-left {
     border-right: 1px dotted var(--point-color);
-    /* 중앙 세로 점선 유지 */
-}
-
-/* 🌟 인쇄용 설정 */
-@page {
-    size: A5 landscape;
-    margin: 0;
-}
-
-.print-pages,
-.print-page {
-    display: none;
-}
-
-@media print {
-
-    /* 원래 화면에 보이던 단일 페이지는 숨김 */
-    body.print-all-days > .daily-wrapper {
-        display: none;
-    }
-
-    /* 대량 인쇄용 컨테이너 표시 */
-    body.print-all-days .print-pages,
-    body.print-all-days .print-page {
-        display: block;
-    }
-
-    /* 각 페이지마다 강제 페이지 나누기 */
-    body.print-all-days .print-page {
-        page-break-after: always;
-        break-after: page;
-        /* 기본 wrapper 속성 유지 */
-        width: 210mm;
-        height: 148mm;
-        padding: 8mm;
-        position: relative;
-    }
-
-    body.print-all-days .print-page:last-child {
-        page-break-after: auto;
-        break-after: auto;
-    }
 }

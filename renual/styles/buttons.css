@@ -1,0 +1,30 @@
+/* ====================== 버튼 스타일 ====================== */
+button {
+    border: none;
+    box-sizing: border-box;
+    width: 20mm;
+    height: 10mm;
+    background-color: var(--point-color);
+    color: var(--bg-color);
+    font-family: 'OngleIpSeaBreeze', sans-serif;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover {
+    transform: scale(1.1);
+    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.2);
+}
+
+.action-btn {
+    border-radius: 50%;
+    font-size: 5mm;
+}
+
+.main-footer button {
+    border-radius: 10px;
+    font-size: 4mm;
+}
+
+.save-btn {
+    background-color: var(--line-color);
+}

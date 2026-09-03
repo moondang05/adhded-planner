@@ -1,0 +1,65 @@
+/* ====================== 인쇄 스타일 ====================== */
+
+/* 공통 서식 */
+@page {
+    size: A5 landscape;
+    margin: 0;
+}
+
+.print-pages,
+.print-page {
+    display: none;
+}
+
+/* 주간 서식 */
+@media print {
+    body.print-all-weeks > .weekly-wrapper {
+        display: none;
+    }
+
+    body.print-all-weeks .print-pages,
+    body.print-all-weeks .print-page {
+        display: block;
+    }
+
+    body.print-all-weeks .print-page {
+        page-break-after: always;
+        break-after: page;
+    }
+
+    body.print-all-weeks .print-page:last-child {
+        page-break-after: auto;
+        break-after: auto;
+    }
+}
+
+/* 일간 서식 */
+@media print {
+
+    /* 원래 화면에 보이던 단일 페이지는 숨김 */
+    body.print-all-days > .daily-wrapper {
+        display: none;
+    }
+
+    /* 대량 인쇄용 컨테이너 표시 */
+    body.print-all-days .print-pages,
+    body.print-all-days .print-page {
+        display: block;
+    }
+
+    /* 각 페이지마다 강제 페이지 나누기 */
+    body.print-all-days .print-page {
+        page-break-after: always;
+        break-after: page;
+        /* 기본 wrapper 속성 유지 */
+        width: 210mm;
+        height: 148mm;
+        padding: 8mm;
+        position: relative;
+    }
+
+    body.print-all-days .print-page:last-child {
+        page-break-after: auto;
+        break-after: auto;
+    }
+}

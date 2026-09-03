@@ -126,6 +126,16 @@ function scaleCalendarToFit() {
     });
 }
 
+// additional 설정 팝업에서 확인한 항목(monthly/weekly/daily)만 사이드바 버튼 잠금을 해제
+export function setSidebarLock(include) {
+    const sidebar = document.getElementById('sidebar');
+
+    ['monthly', 'weekly', 'daily'].forEach((key) => {
+        const btn = sidebar.querySelector(`button.${key}.action-btn`);
+        if (btn) btn.disabled = !include[key];
+    });
+}
+
 export function setupSidebarEvents() {
     const sidebar = document.getElementById('sidebar');
 

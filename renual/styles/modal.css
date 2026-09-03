@@ -1,0 +1,149 @@
+/* ====================== additional 설정 모달 스타일 ====================== */
+.modal-overlay {
+    position: absolute;
+    inset: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    z-index: 100;
+}
+
+.modal-overlay.open {
+    display: flex;
+}
+
+.modal-panel {
+    display: flex;
+    flex-direction: column;
+    width: 42.86%;
+    /* 210mm 기준 박스의 3/7 */
+    height: 90%;
+    padding: 6mm 5mm;
+    border-radius: 5mm;
+    background: var(--bg-color);
+    box-shadow: 0 2mm 6mm rgba(0, 0, 0, 0.25);
+    overflow-y: auto;
+}
+
+.modal-title {
+    margin-bottom: 4mm;
+    font-size: 5mm;
+    font-family: 'OkMallangB', sans-serif;
+    text-align: center;
+    color: var(--line-color);
+}
+
+.modal-section {
+    margin-bottom: 4mm;
+}
+
+.modal-label {
+    margin-bottom: 2mm;
+    font-size: 3.2mm;
+    font-family: 'Cafe24Surround', sans-serif;
+    letter-spacing: 0.3mm;
+    color: var(--line-color);
+}
+
+/* 월/주/일간 포함 여부 */
+.toggle-group {
+    display: flex;
+    gap: 2mm;
+}
+
+.toggle-btn {
+    flex: 1;
+    width: auto;
+    height: 9mm;
+    background: transparent;
+    border: 1px solid var(--line-color);
+    color: var(--line-color);
+    font-size: 3.6mm;
+    border-radius: 10px;
+}
+
+.toggle-btn.active {
+    background: var(--point-color);
+    border-color: var(--point-color);
+    color: var(--bg-color);
+}
+
+/* 출력 범위(날짜) */
+.range-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2mm;
+}
+
+.range-row label {
+    font-size: 3.4mm;
+    font-family: 'Cafe24Surround', sans-serif;
+    color: var(--line-color);
+}
+
+.range-row input[type="date"] {
+    width: 45mm;
+    padding: 1mm 1.5mm;
+    border: 1px solid var(--line-color);
+    border-radius: 2mm;
+    background: var(--bg-color);
+    color: var(--line-color);
+    font-family: 'Cafe24Surround', sans-serif;
+    font-size: 3.4mm;
+}
+
+/* 표지 추가 여부 */
+.cover-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2mm;
+}
+
+.cover-btn {
+    width: auto;
+    height: 9mm;
+    background: transparent;
+    border: 1px solid var(--line-color);
+    color: var(--line-color);
+    font-size: 3.6mm;
+    border-radius: 10px;
+}
+
+.cover-btn.active {
+    background: var(--point-color);
+    border-color: var(--point-color);
+    color: var(--bg-color);
+}
+
+/* 하단 취소/확인 */
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 3mm;
+    margin-top: auto;
+    padding-top: 4mm;
+}
+
+.modal-cancel-btn,
+.modal-confirm-btn {
+    width: 18mm;
+    height: 8mm;
+    font-size: 3.6mm;
+    font-family: 'OngleIpSeaBreeze', sans-serif;
+    border-radius: 10px;
+}
+
+.modal-cancel-btn {
+    background: transparent;
+    border: 1px solid var(--line-color);
+    color: var(--line-color);
+}
+
+.modal-confirm-btn {
+    background: var(--point-color);
+    color: var(--bg-color);
+}

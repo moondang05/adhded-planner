@@ -10,5 +10,6 @@ export const appState = {
         Holidays: holidaysData,
         Designs: designData
     },
-    currentView: 'guide'
+    currentView: 'guide',
+    additionalConfirmed: false // additional 설정 팝업에서 확인을 누르면 true (가이드 1번 표시에 사용)
 };

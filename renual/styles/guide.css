@@ -1,0 +1,51 @@
+/* ====================== 가이드 화면(guide) 전용 스타일 ====================== */
+.info-preview > h1 {
+    display: flex;
+    font-size: 8mm;
+    font-family: 'OngleIpSeaBreeze', sans-serif;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1mm;
+    color: var(--line-color);
+    height: 15mm;
+}
+
+.guide-frame {
+    display: grid;
+    grid-template-columns: 9mm 1fr;
+    width: 70%;
+    height: 80%;
+}
+
+.circles {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 12mm;
+    margin-right: 1.5mm;
+}
+
+.circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 4mm;
+    height: 4mm;
+    border-radius: 50%;
+    background-color: var(--point-color);
+    font-size: 3mm;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    color: var(--bg-color);
+}
+
+.guide {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    font-size: 5mm;
+    font-family: 'Cafe24Surround', sans-serif;
+    gap: 4mm;
+    color: var(--line-color);
+}

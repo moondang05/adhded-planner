@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planner</title>
+
+    <link rel="stylesheet" href="./styles/reset.css">
+    <link rel="stylesheet" href="./styles/variables.css">
+    <link rel="stylesheet" href="./styles/layout.css">
+    <link rel="stylesheet" href="./styles/buttons.css">
+    <link rel="stylesheet" href="./styles/guide.css">
+    <link rel="stylesheet" href="./styles/monthly.css">
+    <link rel="stylesheet" href="./styles/weekly.css">
+    <link rel="stylesheet" href="./styles/daily.css">
+    <link rel="stylesheet" href="./styles/print.css">
+
+    <!-- 시간 참조를 위한 호출 -->
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore-compat.js"></script>
+</head>
+
+<body>
+    <main class="main-wrapper">
+        <header class="main-header">
+            <div>
+                <h2>options</h2>
+            </div>
+            <div>
+                <h1>PLANNER MAKER</h1>
+            </div>
+
+            <div class="date">
+                <p class="eyebrow">DATE</p>
+                <!--실시간 시간 값 받아와서 반영-->
+                <h3 class="time-box" id="time-box"></h3>
+            </div>
+        </header>
+
+        <section class="main-stage" id="main-stage">
+            <div class="sidebar" id="sidebar">
+
+                <span class="monthly option">
+                    <p>Monthly</p>
+                    <button class="monthly action-btn">수정</button>
+                </span>
+
+                <span class="weekly option">
+                    <p>Weekly</p>
+                    <button class="weekly action-btn">수정</button>
+                </span>
+
+                <span class="daily option">
+                    <p>Daily</p>
+                    <button class="daily action-btn">수정</button>
+                </span>
+
+            </div>
+
+            <!--초기 화면 사용 방법 안내문 및 수정 시 실시간으로 피드백 미리보기-->
+            <div class="info-preview" id="info-preview"></div>
+        </section>
+
+        <footer class="main-footer">
+            <div>
+                <button class="action-btn">additional</button>
+            </div>
+
+
+            <div>
+                <button class="save-btn">check&save</button>
+            </div>
+        </footer>
+    </main>
+
+    <script type="module" src="./scripts/core/app.js"></script>
+
+</body>
+</html>

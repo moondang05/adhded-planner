@@ -1,0 +1,130 @@
+/* ====================== 헤더 스타일 ====================== */
+.main-header {
+    height: 14mm;
+    margin-bottom: 4mm;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    align-items: flex-end;
+    border-bottom: 1.5px solid var(--line-color);
+}
+
+header > div > h2 {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1mm;
+    font-size: 5mm;
+    font-family: 'OkMallangB', sans-serif;
+    letter-spacing: 0.4mm;
+    color: var(--line-color);
+}
+
+header > div > h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1mm;
+    font-size: 7mm;
+    font-family: 'OngleIpSeaBreeze', sans-serif;
+    letter-spacing: 0.6mm;
+    color: var(--point-color);
+}
+
+.date {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    justify-items: right;
+    font-size: 6mm;
+    font-family: 'OkMallangB', sans-serif;
+    color: var(--line-color);
+}
+
+.eyebrow {
+    margin-bottom: 1mm;
+    font-size: 3mm;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    letter-spacing: 0.6mm;
+    color: var(--line-color);
+}
+
+.time-box {
+    margin-bottom: 1mm;
+}
+
+.highlight {
+    color: var(--point-color);
+}
+
+/* ====================== 메인 본문 스타일 ====================== */
+.main-stage {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    height: calc(100% - 30mm);
+    width: 100%;
+    position: relative;
+}
+
+.main-stage::after {
+    content: '';
+    position: absolute;
+    left: 25%;
+    top: 0;
+    bottom: 0;
+    border-left: 1.5px dotted var(--line-color);
+    transform: translateX(-50%);
+}
+
+/* ====================== 사이드바 스타일 ====================== */
+.sidebar {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.option {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.option > p {
+    font-size: 6mm;
+    font-family: 'OkMallangB', sans-serif;
+    margin-bottom: 1mm;
+    color: var(--line-color);
+}
+
+/* ====================== 미리보기 영역 공통 스타일 ====================== */
+.info-preview {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* 월간/일간/가이드 화면은 .info-preview의 기본 중앙 정렬을 그대로 사용한다.
+   실제 크기(210x148mm) 그대로 렌더링된 뒤 view-controller.js가 박스 중심을 기준으로
+   scale만 적용하므로, 정중앙에 위치한 채로 비율을 유지하며 축소된다. */
+
+/* 주간 화면만 좌측 상단 기준(flex-start)으로 배치 + 여백을 둔다 */
+.info-preview.weekly-view {
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 5mm 0 0 10mm;
+}
+
+/* ====================== 푸터 스타일 ====================== */
+.main-footer {
+    height: 14mm;
+    margin-top: 4mm;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4mm;
+    border-top: 1.5px solid var(--line-color);
+}

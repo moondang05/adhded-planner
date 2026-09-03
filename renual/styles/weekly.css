@@ -1,0 +1,345 @@
+/* ====================== 주간(Weekly) 뷰 전용 스타일 ====================== */
+
+.weekly-wrapper {
+    width: 210mm;
+    height: 148mm;
+    padding: 8mm;
+    background: var(--bg-color);
+    position: relative;
+    color: var(--line-color);
+}
+
+.weekly-header {
+    height: 14mm;
+    margin-bottom: 4mm;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 1.5px solid var(--line-color);
+}
+
+.month-gauge {
+    position: absolute;
+    left: calc(var(--weekly-grid-left, 0px) + 10mm);
+    /* header 높이(24mm)가 고정값이라 하단 border까지의 간격도 고정 mm로 직접 지정.
+       다른 요소(타이틀/week-info)처럼 딱 붙진 않되 여백은 좁게: 24mm - 3mm(간격) - 4mm(자체 높이) */
+    top: 12mm;
+    width: calc(var(--weekly-column-width, 0px) * 4);
+    height: 4mm;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    border: 0.75px solid var(--point-color);
+    border-radius: 999px;
+    overflow: visible;
+}
+
+.gauge-segment {
+    border-right: 0.5px dotted var(--point-color);
+}
+
+.gauge-segment:last-child {
+    border-right: 0;
+}
+
+.gauge-segment:first-child {
+    border-left: 0;
+    border-radius: 999px 0 0 999px;
+}
+
+.gauge-segment.is-filled {
+    background-color: var(--point-color);
+}
+
+.gauge-marker {
+    position: absolute;
+    top: 50%;
+    left: var(--gauge-progress, 0%);
+    width: 5.5mm;
+    height: 5.5mm;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-color);
+    border: 1px solid var(--point-color);
+    border-radius: 50%;
+    z-index: 2;
+}
+
+.gauge-marker-inner {
+    width: 3mm;
+    height: 3mm;
+    background-color: var(--point-color);
+    border: 1px solid var(--point-color);
+    border-radius: 50%;
+}
+
+.gauge-scale {
+    position: absolute;
+    top: calc(100% + 0.8mm);
+    left: 0;
+    width: 100%;
+    height: 3mm;
+    color: var(--line-color);
+    font-family: 'OngleIpSeaBreeze', sans-serif;
+    font-size: 2.3mm;
+    line-height: 1;
+}
+
+.gauge-scale-start,
+.gauge-scale-first,
+.gauge-scale-second,
+.gauge-scale-end {
+    position: absolute;
+    top: 0;
+}
+
+.gauge-scale-start {
+    left: 0;
+}
+
+.gauge-scale-first {
+    left: 33.3334%;
+    transform: translateX(-50%);
+}
+
+.gauge-scale-second {
+    left: 66.6667%;
+    transform: translateX(-50%);
+}
+
+.gauge-scale-end {
+    right: 0;
+}
+
+.week-title {
+    font-family: 'OkMallangB', sans-serif;
+    font-size: 10mm;
+    line-height: 0.8;
+    font-weight: normal;
+}
+
+.week-info {
+    display: flex;
+    gap: 4mm;
+    align-items: center;
+    padding-bottom: 2mm;
+    font-family: 'OngleIpSeaBreeze', sans-serif;
+    font-size: 4mm;
+}
+
+.week-number {
+    display: inline-flex;
+    width: 9mm;
+    height: 9mm;
+    justify-content: center;
+    align-items: center;
+    border: 1.5px solid var(--line-color);
+    border-radius: 50%;
+}
+
+.weekly-grid {
+    height: 81.4mm;
+    width: calc(100% - var(--month-title-end, 0px) - 10mm);
+    margin-left: 0;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    border-left: 0.6mm solid var(--line-color);
+    border-right: 0.6mm solid var(--line-color);
+    border-bottom: 0.6mm solid var(--line-color);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+/* 🌟 weekly-grid의 자식이 아니라 weekly-stage의 형제로 분리 - grid 시작 지점(--month-title-end)은
+   구분선 역할로만 쓰고, 박스 자체는 stage 전체 너비를 차지하도록 절대 위치로 배치 */
+.weekly-bottom-box {
+    position: absolute;
+    left: 0;
+    top: calc(100% + 5mm);
+    width: 100%;
+    height: 20mm;
+    display: grid;
+    grid-template-rows: repeat(4, 1fr);
+    border: 1.5px solid var(--line-color);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.weekly-bottom-row {
+    display: grid;
+    grid-template-columns: calc(var(--month-title-end, 0px) + 10mm) 1fr;
+    border-bottom: 0.5px solid var(--line-color);
+}
+
+.weekly-bottom-row:last-child {
+    border-bottom: 0;
+}
+
+.weekly-bottom-prefix {
+    display: flex;
+    align-items: center;
+    color: var(--line-color);
+    font-family: 'OngleIpSeaBreeze', sans-serif;
+    font-size: 3mm;
+    padding: 0.5mm 0 0 1.5mm;
+    border-right: 1.5px solid var(--line-color);
+}
+
+.weekly-bottom-columns {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.weekly-bottom-cell {
+    position: relative;
+    display: flex;
+    align-items: center;
+    color: var(--line-color);
+    font-family: 'OngleIpSeaBreeze', sans-serif;
+    font-size: 3mm;
+    padding: 0.5mm 0 0 1.5mm;
+    border-right: 0.5px solid var(--line-color);
+}
+
+.weekly-bottom-cell::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    border-left: 1.5px dotted var(--line-color);
+}
+
+.weekly-bottom-cell:last-child {
+    border-right: 0;
+}
+
+.weekly-stage {
+    display: flex;
+    align-items: flex-start;
+    gap: 10mm;
+    height: 81.4mm;
+    position: relative;
+}
+
+.weekly-stage::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: calc(var(--month-title-end, 0px) - 4.6mm);
+    height: 81.4mm;
+    border-left: 1px dotted var(--line-color);
+}
+
+.weekly-todo {
+    width: var(--month-title-end, 0px);
+    height: 81.4mm;
+    border: 1.5px solid var(--line-color);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.weekly-todo-title {
+    height: calc(7mm - 1.5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--line-color);
+    color: #fff;
+    font-family: 'OngleIpSeaBreeze', sans-serif;
+    font-size: 4mm;
+}
+
+.weekly-todo-rows {
+    display: grid;
+    grid-template-rows: repeat(17, 1fr);
+    height: calc(100% - (7mm - 1.5px));
+}
+
+.weekly-todo-row {
+    display: grid;
+    grid-template-columns: 8mm 1fr;
+    border-bottom: 1px dotted var(--line-color);
+}
+
+.weekly-todo-row-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    font-family: 'OkMallangB', sans-serif;
+    font-size: 3mm;
+}
+
+.weekly-todo-row:last-child {
+    border-bottom: 0;
+}
+
+.day-column {
+    display: grid;
+    grid-template-rows: 7mm repeat(17, 1fr);
+    overflow: hidden;
+}
+
+.day-heading {
+    padding: 1.5mm;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--line-color);
+    color: #fff;
+    font-family: 'OkMallangB', sans-serif;
+    font-size: 3.2mm;
+    border-top: 0.6mm solid var(--line-color);
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.day-date {
+    display: inline-flex;
+    min-width: 5mm;
+    height: 5mm;
+    align-items: center;
+    justify-content: center;
+}
+
+.day-date.highlight-date {
+    background: var(--point-color);
+    border-radius: 50%;
+    color: var(--bg-color);
+}
+
+.day-column:first-child .day-heading {
+    margin-left: 0;
+}
+
+.day-column:last-child .day-heading {
+    margin-right: 0;
+}
+
+.day-body {
+    position: relative;
+    border-right: 0.6mm solid var(--line-color);
+    border-bottom: 1px dotted var(--line-color);
+}
+
+.day-body::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 2mm;
+    width: 2mm;
+    height: 2mm;
+    border: 0.5px solid var(--line-color);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.day-column:last-child .day-body {
+    border-right: 0;
+}
+
+.day-body:last-child {
+    border-bottom: 0;
+}

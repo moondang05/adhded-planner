@@ -1,0 +1,58 @@
+/* ====================== 디자인 서식 (폰트 / 색상 / 테마) ====================== */
+@font-face {
+    font-family: 'OkMallangB';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2603-1@1.0/OkMallangB-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'OngleIpSeaBreeze';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2510-1@1.0/Ownglyph_the_sea_breeze-Rg.woff2') format('woff2');
+    font-weight: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Cafe24Surround';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');
+    font-weight: normal;
+    font-display: swap;
+}
+
+:root {
+    --bg-color: #F5F1E7;
+    --line-color: #1A2B4C;
+    --point-color: #E74C3C;
+}
+
+/* 테마 클래스들 */
+.theme-green {
+    --line-color: #2D5A27;
+    --point-color: #F4A261;
+}
+
+.theme-purple {
+    --line-color: #6A4C93;
+    --point-color: #E76F51;
+}
+
+.theme-pink {
+    --line-color: #D90429;
+    --point-color: #FFB703;
+}
+
+.theme-yellow {
+    --line-color: #C49428;
+    --point-color: #2A9D8F;
+}
+
+.theme-blue {
+    --line-color: #1D3557;
+    --point-color: #E63946;
+}
+
+.theme-orange {
+    --line-color: #F4A261;
+    --point-color: #264653;
+}

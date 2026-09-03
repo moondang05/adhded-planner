@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>데일리 플래너</title>
+    <link rel="stylesheet" href="daily_style.css">
+
+    <!-- Firebase 구버전 호환 라이브러리 추가 -->
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore-compat.js"></script>
+</head>
+
+<body>
+    <main class="daily-wrapper">
+        <header class="daily-header">
+            <div>
+                <p class="eyebrow">DAILY PLANNER</p>
+                <h1 id="day-title">WEEK nn</h1>
+            </div>
+
+            <div class="mood-container">
+                <p class="eyebrow" style="text-align: right;">DAILY MOOD</p>
+                <div id="mood-circles" class="mood-circles"></div>
+            </div>
+        </header>
+
+        <!-- JS가 이 안에 월~목(4블럭) 또는 금~일(3블럭)을 동적으로 생성해 넣습니다 -->
+        <section class="daily-stage" id="daily-stage"></section>
+
+    </main>
+
+    <script src="daily_script.js"></script>
+</body>
+
+
+</html>

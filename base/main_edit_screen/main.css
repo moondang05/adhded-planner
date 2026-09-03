@@ -1,0 +1,365 @@
+/* ====================== 기본 리셋 ====================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* ====================== 디자인 서식 ====================== */
+@font-face {
+    font-family: 'OkMallangB';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2603-1@1.0/OkMallangB-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'OngleIpSeaBreeze';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2510-1@1.0/Ownglyph_the_sea_breeze-Rg.woff2') format('woff2');
+    font-weight: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Cafe24Surround';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');
+    font-weight: normal;
+    font-display: swap;
+}
+
+:root {
+    --bg-color: #F5F1E7;
+    --line-color: #1A2B4C;
+    --point-color: #E74C3C;
+}
+
+/* 테마 클래스들 */
+.theme-green {
+    --line-color: #2D5A27;
+    --point-color: #F4A261;
+}
+
+.theme-purple {
+    --line-color: #6A4C93;
+    --point-color: #E76F51;
+}
+
+.theme-pink {
+    --line-color: #D90429;
+    --point-color: #FFB703;
+}
+
+.theme-yellow {
+    --line-color: #C49428;
+    --point-color: #2A9D8F;
+}
+
+.theme-blue {
+    --line-color: #1D3557;
+    --point-color: #E63946;
+}
+
+.theme-orange {
+    --line-color: #F4A261;
+    --point-color: #264653;
+}
+
+/* ====================== 전체 배경 스타일 ====================== */
+body {
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 210mm;
+    min-height: 148mm;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    transition: background-color 0.5s;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+}
+
+.main-wrapper {
+    width: 210mm;
+    height: 148mm;
+    padding: 8mm;
+    background: var(--bg-color);
+    position: relative;
+}
+
+/* ====================== 헤더 스타일 ====================== */
+.main-header {
+    height: 14mm;
+    margin-bottom: 4mm;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    align-items: flex-end;
+    border-bottom: 1.5px solid var(--line-color);
+}
+
+header > div > h2 {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1mm;
+    font-size: 5mm;
+    font-family: 'OkMallangB', sans-serif;
+    letter-spacing: 0.4mm;
+    color: var(--line-color);
+}
+
+header > div > h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1mm;
+    font-size: 7mm;
+    font-family: 'OngleIpSeaBreeze', sans-serif;
+    letter-spacing: 0.6mm;
+    color: var(--point-color);
+}
+
+.date {
+    display: grid;
+    grid-template-rows:auto 1fr;
+    justify-items: right;
+    font-size: 6mm;
+    font-family: 'OkMallangB', sans-serif;
+    color: var(--line-color);
+}
+
+.eyebrow {
+    margin-bottom: 1mm;
+    font-size: 3mm;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    letter-spacing: 0.6mm;
+    color: var(--line-color);
+}
+
+.time-box {
+    margin-bottom: 1mm;
+}
+
+.highlight {
+    color: var(--point-color);
+}
+
+/* ====================== 메인 본문 스타일 ====================== */
+.main-stage {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    height: calc(100% - 30mm);
+    width: 100%;
+    position: relative;
+}
+
+.main-stage::after {
+    content: '';
+    position: absolute;
+    left: 25%;
+    top: 0;
+    bottom: 0;
+    border-left: 1.5px dotted var(--line-color);
+    transform: translateX(-50%);
+}
+
+/* ====================== 사이드바 스타일 ====================== */
+.sidebar {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.option {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.option > p {
+    font-size: 6mm;
+    font-family: 'OkMallangB', sans-serif;
+    margin-bottom: 1mm;
+    color: var(--line-color);
+}
+
+/* ====================== 가이드 및 프리뷰 스타일 ====================== */
+.info-preview {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* 플래너 뷰 (월간/주간/일간) */
+.info-preview.planner-view {
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 5mm 0 0 10mm;
+}
+
+.info-preview > h1 {
+    display: flex;
+    font-size: 8mm;
+    font-family: 'OngleIpSeaBreeze', sans-serif;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1mm;
+    color: var(--line-color);
+    height: 15mm;
+}
+
+.guide-frame {
+    display: grid;
+    grid-template-columns: 9mm 1fr;
+    width: 70%;
+    height: 80%;
+}
+
+.circles {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 12mm;
+    margin-right: 1.5mm;
+}
+
+.circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 4mm;
+    height: 4mm;
+    border-radius: 50%;
+    background-color: var(--point-color);
+    font-size: 3mm;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    color: var(--bg-color);
+}
+
+.guide {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    font-size: 5mm;
+    font-family: 'Cafe24Surround', sans-serif;
+    gap: 4mm;
+    color: var(--line-color);
+}
+
+/* ====================== 푸터 스타일 ====================== */
+.main-footer {
+    height: 14mm;
+    margin-top: 4mm;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4mm;
+    border-top: 1.5px solid var(--line-color);
+}
+
+/* ====================== 버튼 스타일 ====================== */
+button {
+    border: none;
+    box-sizing: border-box;
+    width: 20mm;
+    height: 10mm;
+    background-color: var(--point-color);
+    color: var(--bg-color);
+    font-family: 'OngleIpSeaBreeze', sans-serif;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover {
+    transform: scale(1.1);
+    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.2);
+}
+
+.action-btn {
+    border-radius: 50%;
+    font-size: 5mm;
+}
+
+.main-footer button {
+    border-radius: 10px;
+    font-size: 4mm;
+}
+
+.save-btn {
+    background-color: var(--line-color);
+}
+
+/* ====================== 인쇄 스타일 ====================== */
+
+/* 공통 서식 */
+@page {
+    size: A5 landscape;
+    margin: 0;
+}
+
+.print-pages,
+.print-page {
+	display: none;
+}
+
+/* 주간 서식 */
+@media print {
+	body.print-all-weeks > .weekly-wrapper {
+		display: none;
+	}
+
+	body.print-all-weeks .print-pages,
+	body.print-all-weeks .print-page {
+		display: block;
+	}
+
+	body.print-all-weeks .print-page {
+	page-break-after: always;
+	break-after: page;
+}
+
+	body.print-all-weeks .print-page:last-child {
+	page-break-after: auto;
+	break-after: auto;
+	}
+}
+
+/* 일간 서식 */
+@media print {
+
+    /* 원래 화면에 보이던 단일 페이지는 숨김 */
+    body.print-all-days > .daily-wrapper {
+        display: none;
+    }
+
+    /* 대량 인쇄용 컨테이너 표시 */
+    body.print-all-days .print-pages,
+    body.print-all-days .print-page {
+        display: block;
+    }
+
+    /* 각 페이지마다 강제 페이지 나누기 */
+    body.print-all-days .print-page {
+        page-break-after: always;
+        break-after: page;
+        /* 기본 wrapper 속성 유지 */
+        width: 210mm;
+        height: 148mm;
+        padding: 8mm;
+        position: relative;
+    }
+
+    body.print-all-days .print-page:last-child {
+        page-break-after: auto;
+        break-after: auto;
+    }
+}@page {
+    size: A5 landscape;
+    margin: 0;
+}

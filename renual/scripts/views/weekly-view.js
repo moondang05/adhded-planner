@@ -114,8 +114,8 @@ function alignGridToMonthTitle(wrapper) {
     gauge.style.setProperty('--weekly-column-width', `${weeklyGrid.clientWidth / 7}px`);
 }
 
-// monday = 화면에 표시할 주의 시작일(월요일). appState.currentDate와는 별개로
-// view-controller.js가 좌우 방향키로 주 단위 이동을 추적하는 값이다.
+// monday = 화면에 표시할 주의 시작일(월요일), appState.weeklyState.monday에서 전달됨.
+// monthly/daily와는 독립적인 값이라 이 화면의 방향키 이동은 다른 화면에 영향을 주지 않는다.
 export function renderWeekly(container, monday, appState) {
     const { Calendar, Holidays, Designs } = appState.plannerData;
     const dayNames = Calendar.days;

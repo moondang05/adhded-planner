@@ -9,13 +9,6 @@ import { appState } from '../core/state.js';
 import { toMonthName, toDayName, addDays } from '../utils/date-utils.js';
 import { isHoliday } from '../utils/holiday-utils.js';
 
-// 일간 화면 좌우 이동에 사용되는 주차 기준일
-let monday = new Date(appState.currentDate);
-const day = monday.getDay() || 7;
-monday.setDate(monday.getDate() - day + 1);
-monday.setHours(0, 0, 0, 0);
-let viewIndex = (day >= 1 && day <= 4) ? 0 : 1;
-
 // 스케일 값 캐시 (번쩍거림 방지)
 let cachedScale = 1;
 
@@ -53,7 +46,7 @@ export function refreshCurrentView() {
     }
 
     else if (appState.currentView === 'weekly') {
-        renderWeekly(container, monday, appState);
+        renderWeekly(container, appState.weeklyState.monday, appState);
         // 주간 화면만 좌측 상단 기준 + 패딩으로 배치
         container.classList.add('planner-view', 'weekly-view');
         const wrapper = container.querySelector('.weekly-wrapper');
@@ -64,7 +57,7 @@ export function refreshCurrentView() {
     }
 
     else if (appState.currentView === 'daily') {
-        renderDaily(container, monday, viewIndex, appState);
+        renderDaily(container, appState.dailyState.monday, appState.dailyState.viewIndex, appState);
         container.classList.add('planner-view');
         const wrapper = container.querySelector('.daily-wrapper');
         if (wrapper) {
@@ -172,8 +165,8 @@ document.addEventListener('keydown', (e) => {
         e.preventDefault();
         const monthOffset = e.key === 'ArrowLeft' ? -1 : 1;
 
-        // appState의 날짜 변경
-        appState.currentDate.setMonth(appState.currentDate.getMonth() + monthOffset);
+        // monthlyState만 변경 (weekly/daily의 탐색 위치에는 영향 없음)
+        appState.monthlyState.baseDate.setMonth(appState.monthlyState.baseDate.getMonth() + monthOffset);
 
         // 변경된 날짜로 화면 다시 그리기
         refreshCurrentView();
@@ -182,10 +175,9 @@ document.addEventListener('keydown', (e) => {
     else if (appState.currentView === 'weekly') {
         e.preventDefault();
         const weekOffset = e.key === 'ArrowLeft' ? -7 : 7;
-        monday = addDays(monday, weekOffset);
 
-        // appState의 날짜 변경
-        appState.currentDate.setDate(appState.currentDate.getDate() + weekOffset);
+        // weeklyState만 변경 (monthly/daily의 탐색 위치에는 영향 없음)
+        appState.weeklyState.monday = addDays(appState.weeklyState.monday, weekOffset);
 
         // 변경된 날짜로 화면 다시 그리기
         refreshCurrentView();
@@ -193,33 +185,23 @@ document.addEventListener('keydown', (e) => {
 
     else if (appState.currentView === 'daily') {
         e.preventDefault();
-        const dayOffset = e.key === 'ArrowLeft' ? -1 : 1;
+        const daily = appState.dailyState;
 
-        // viewIndex와 주 정보 업데이트
+        // dailyState만 변경 (monthly/weekly의 탐색 위치에는 영향 없음)
         if (e.key === 'ArrowLeft') {
-            if (viewIndex === 1) {
-                viewIndex = 0; // 현주 후반부 → 현주 전반부
+            if (daily.viewIndex === 1) {
+                daily.viewIndex = 0; // 현주 후반부 → 현주 전반부
             } else {
-                monday.setDate(monday.getDate() - 7);
-                viewIndex = 1; // 현주 전반부 → 전주 후반부
+                daily.monday.setDate(daily.monday.getDate() - 7);
+                daily.viewIndex = 1; // 현주 전반부 → 전주 후반부
             }
         } else if (e.key === 'ArrowRight') {
-            if (viewIndex === 0) {
-                viewIndex = 1; // 현주 전반부 → 현주 후반부
+            if (daily.viewIndex === 0) {
+                daily.viewIndex = 1; // 현주 전반부 → 현주 후반부
             } else {
-                monday.setDate(monday.getDate() + 7);
-                viewIndex = 0; // 현주 후반부 → 다음주 전반부
+                daily.monday.setDate(daily.monday.getDate() + 7);
+                daily.viewIndex = 0; // 현주 후반부 → 다음주 전반부
             }
-        }
-
-        // appState.currentDate 업데이트 (뷰에 표시될 대표 날짜)
-        appState.currentDate = new Date(monday);
-        if (viewIndex === 0) {
-            // 전반부(월~목): 왼쪽 화살표면 전주 마지막 날, 오른쪽 화살표면 현주 목요일
-            appState.currentDate.setDate(monday.getDate() + (dayOffset === -1 ? -1 : 4));
-        } else {
-            // 후반부(금~일): 왼쪽 화살표면 현주 월요일, 오른쪽 화살표면 다음주 월요일
-            appState.currentDate.setDate(monday.getDate() + (dayOffset === -1 ? 0 : 7));
         }
 
         // 변경된 날짜로 화면 다시 그리기

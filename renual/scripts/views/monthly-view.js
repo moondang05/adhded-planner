@@ -31,7 +31,7 @@ function createDateCell(dayNumber, className) {
 
 export function renderMonthly(container, appState) {
     const { Calendar, Holidays, Designs } = appState.plannerData;
-    const date = appState.currentDate;
+    const date = appState.monthlyState.baseDate;
     const year = date.getFullYear();
     const month = date.getMonth();
 

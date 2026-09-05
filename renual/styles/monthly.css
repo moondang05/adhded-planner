@@ -75,7 +75,7 @@
 
 .quote-row {
     height: calc(100% / 3);
-    border-bottom: 1px dotted var(--line-color);
+    border-bottom: 1px dashed var(--line-color);
 }
 
 .quote-row:last-child {
@@ -177,7 +177,7 @@
     display: grid;
     grid-template-columns: var(--todo-cell-size) 1fr;
     position: relative;
-    border-bottom: 1px dotted var(--line-color);
+    border-bottom: 1px dashed var(--line-color);
 }
 
 .todo-row::before {
@@ -186,7 +186,7 @@
     top: 0;
     bottom: 0;
     left: var(--todo-cell-size);
-    border-left: 1px dotted var(--line-color);
+    border-left: 1px dashed var(--line-color);
 }
 
 .todo-row:last-child {

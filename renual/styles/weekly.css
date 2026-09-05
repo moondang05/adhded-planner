@@ -7,6 +7,12 @@
     background: var(--bg-color);
     position: relative;
     color: var(--line-color);
+    /* 원래 17행 기준 행 높이를 그대로 유지한 채 10행으로 줄이면 박스 아래에 남는 공간이 생기고,
+       그 공간(제거된 7행 크기 - 갭)이 Habit Tracker 영역이 된다 */
+    --weekly-row-h: calc((81.4mm - (7mm - 1.5px)) / 17);
+    --habit-gap: 3mm;
+    --habit-box-h: calc(var(--weekly-row-h) * 7 - var(--habit-gap));
+    --weekly-main-h: calc(81.4mm - var(--habit-box-h) - var(--habit-gap));
 }
 
 .weekly-header {
@@ -34,7 +40,7 @@
 }
 
 .gauge-segment {
-    border-right: 0.5px dotted var(--point-color);
+    border-right: 0.5px dashed var(--point-color);
 }
 
 .gauge-segment:last-child {
@@ -140,7 +146,7 @@
 }
 
 .weekly-grid {
-    height: 81.4mm;
+    height: var(--weekly-main-h);
     width: calc(100% - var(--month-title-end, 0px) - 10mm);
     margin-left: 0;
     display: grid;
@@ -209,7 +215,7 @@
     top: 0;
     bottom: 0;
     left: 50%;
-    border-left: 1.5px dotted var(--line-color);
+    border-left: 1.5px dashed var(--line-color);
 }
 
 .weekly-bottom-cell:last-child {
@@ -224,18 +230,29 @@
     position: relative;
 }
 
+/* 투두/해빗 트래커 박스 구간에만 점선을 그리고, 그 사이 갭(--habit-gap)에는 끊어서
+   점선이 빈 공간에 떠 보이지 않게 두 구간(::before/::after)으로 나눈다 */
 .weekly-stage::before {
     content: '';
     position: absolute;
     top: 0;
     left: calc(var(--month-title-end, 0px) - 4.6mm);
-    height: 81.4mm;
-    border-left: 1px dotted var(--line-color);
+    height: var(--weekly-main-h);
+    border-left: 1px dashed var(--line-color);
+}
+
+.weekly-stage::after {
+    content: '';
+    position: absolute;
+    top: calc(var(--weekly-main-h) + var(--habit-gap));
+    left: calc(var(--month-title-end, 0px) - 4.6mm);
+    height: var(--habit-box-h);
+    border-left: 1px dashed var(--line-color);
 }
 
 .weekly-todo {
     width: var(--month-title-end, 0px);
-    height: 81.4mm;
+    height: var(--weekly-main-h);
     border: 1.5px solid var(--line-color);
     border-radius: 4px;
     overflow: hidden;
@@ -254,14 +271,14 @@
 
 .weekly-todo-rows {
     display: grid;
-    grid-template-rows: repeat(17, 1fr);
+    grid-template-rows: repeat(10, 1fr);
     height: calc(100% - (7mm - 1.5px));
 }
 
 .weekly-todo-row {
     display: grid;
     grid-template-columns: 8mm 1fr;
-    border-bottom: 1px dotted var(--line-color);
+    border-bottom: 1px dashed var(--line-color);
 }
 
 .weekly-todo-row-number {
@@ -278,9 +295,78 @@
     border-bottom: 0;
 }
 
+/* Habit Tracker: 투두 박스와 같은 양식(제목바 + 점선 구분 행), 줄어든 투두 박스 밑의 여분 공간에 배치 */
+.habit-tracker {
+    position: absolute;
+    left: 0;
+    top: calc(var(--weekly-main-h) + var(--habit-gap));
+    width: var(--month-title-end, 0px);
+    height: var(--habit-box-h);
+    border: 1.5px solid var(--line-color);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.habit-tracker-title {
+    height: calc(7mm - 1.5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--line-color);
+    color: #fff;
+    font-family: 'OngleIpSeaBreeze', sans-serif;
+    font-size: 4mm;
+}
+
+.habit-tracker-rows {
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+    height: calc(100% - (7mm - 1.5px));
+}
+
+.habit-tracker-row {
+    display: grid;
+    grid-template-columns: 8mm 1fr;
+    border-bottom: 1px dashed var(--line-color);
+}
+
+.habit-tracker-row-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    font-family: 'OkMallangB', sans-serif;
+    font-size: 3mm;
+    color: var(--point-color);
+}
+
+.habit-tracker-row:last-child {
+    border-bottom: 0;
+}
+
+/* Habit Tracker 옆 그리드: 요일 헤더는 위 weekly-grid와 겹치므로 생략하고,
+   기존 day-column/day-body 스타일을 그대로 재사용해 행만 5개로 구성.
+   habit-tracker의 제목바 높이만큼 아래로 내려서 1행부터 habit-tracker의 실제 1행과 맞춘다 */
+.habit-grid {
+    position: absolute;
+    left: calc(var(--month-title-end, 0px) + 10mm);
+    top: calc(var(--weekly-main-h) + var(--habit-gap) + (7mm - 1.5px));
+    width: calc(100% - var(--month-title-end, 0px) - 10mm);
+    height: calc(var(--habit-box-h) - (7mm - 1.5px));
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    border: 0.6mm solid var(--line-color);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.day-column.habit-day-column {
+    grid-template-rows: repeat(5, 1fr);
+}
+
 .day-column {
     display: grid;
-    grid-template-rows: 7mm repeat(17, 1fr);
+    grid-template-rows: 7mm repeat(10, 1fr);
     overflow: hidden;
 }
 
@@ -323,7 +409,7 @@
 .day-body {
     position: relative;
     border-right: 0.6mm solid var(--line-color);
-    border-bottom: 1px dotted var(--line-color);
+    border-bottom: 1px dashed var(--line-color);
 }
 
 .day-body::before {

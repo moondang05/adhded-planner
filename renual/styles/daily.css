@@ -54,7 +54,7 @@
 .mood-circle {
     width: 8mm;
     height: 8mm;
-    border: 3px dotted var(--line-color);
+    border: 3px dashed var(--line-color);
     border-radius: 50%;
 }
 
@@ -74,7 +74,7 @@
     left: 50%;
     top: 0;
     bottom: 0;
-    border-left: 1.5px dotted var(--line-color);
+    border-left: 1.5px dashed var(--line-color);
     transform: translateX(-50%);
 }
 
@@ -138,7 +138,7 @@
 .daily-todo-row {
     display: grid;
     grid-template-columns: var(--todo-columns);
-    border-bottom: 1px dotted var(--line-color);
+    border-bottom: 1px dashed var(--line-color);
 }
 
 .daily-todo-row:last-child {
@@ -146,11 +146,11 @@
 }
 
 .row-col-start {
-    border-right: 1px dotted var(--line-color);
+    border-right: 1px dashed var(--line-color);
 }
 
 .row-col-time {
-    border-left: 1px dotted var(--line-color);
+    border-left: 1px dashed var(--line-color);
 }
 
 /* 🌟 빈칸(일요일 하단)을 채울 추가 박스 스타일 */
@@ -189,5 +189,5 @@
 }
 
 .extra-col-left {
-    border-right: 1px dotted var(--point-color);
+    border-right: 1px dashed var(--point-color);
 }

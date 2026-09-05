@@ -1,6 +1,6 @@
 // 일간(Daily) 뷰 렌더링
 import { isHoliday } from '../utils/holiday-utils.js';
-import { getWeekNumber } from '../utils/date-utils.js';
+import { getWeekNumber, getWeekThemeDate } from '../utils/date-utils.js';
 
 // 요일 하나 분(날짜 칸 + 시간표 칸)의 day-wrapper 생성
 function createDayWrapper(targetDate, dayName, monthNames, Holidays) {
@@ -58,7 +58,7 @@ export function renderDaily(container, monday, viewIndex, appState) {
     const dayNames = Calendar.days;
     const monthNames = Calendar.month;
 
-    document.body.className = Designs.Themes[monday.getMonth() % Designs.Themes.length];
+    document.body.className = Designs.Themes[getWeekThemeDate(monday).getMonth() % Designs.Themes.length];
 
     container.innerHTML = `
         <div class="daily-wrapper">

@@ -1,6 +1,6 @@
 // 주간(Weekly) 뷰 렌더링
 import { isHoliday } from '../utils/holiday-utils.js';
-import { addDays, formatDate, getWeekNumber } from '../utils/date-utils.js';
+import { addDays, formatDate, getWeekNumber, getWeekThemeDate } from '../utils/date-utils.js';
 
 function fillGaugeSegments(gauge) {
     const marker = gauge.querySelector('.gauge-marker');
@@ -12,7 +12,7 @@ function fillGaugeSegments(gauge) {
 }
 
 function fillWeeklyTodoRows(container) {
-    for (let i = 1; i <= 17; i += 1) {
+    for (let i = 1; i <= 10; i += 1) {
         const row = document.createElement('div');
         row.className = 'weekly-todo-row';
 
@@ -22,6 +22,38 @@ function fillWeeklyTodoRows(container) {
 
         row.appendChild(number);
         container.appendChild(row);
+    }
+}
+
+function fillHabitTrackerRows(container) {
+    for (let i = 1; i <= 5; i += 1) {
+        const row = document.createElement('div');
+        row.className = 'habit-tracker-row';
+
+        const number = document.createElement('span');
+        number.className = 'habit-tracker-row-number';
+        number.textContent = String(i).padStart(2, '0');
+
+        row.appendChild(number);
+        container.appendChild(row);
+    }
+}
+
+// Habit Tracker 옆 그리드: weekly-grid와 동일한 day-column/day-body를 재사용하되
+// 요일 헤더 없이 5개 행만 채운다 (헤더는 위쪽 weekly-grid와 겹치므로 생략)
+function fillHabitGrid(grid) {
+    grid.innerHTML = '';
+    for (let day = 0; day < 7; day += 1) {
+        const column = document.createElement('div');
+        column.className = 'day-column habit-day-column';
+
+        for (let row = 0; row < 5; row += 1) {
+            const body = document.createElement('div');
+            body.className = 'day-body';
+            column.appendChild(body);
+        }
+
+        grid.appendChild(column);
     }
 }
 
@@ -69,7 +101,7 @@ function renderWeekDays(grid, weekStart, dayNames, Holidays) {
         heading.append(dayLabel, dateLabel);
         column.appendChild(heading);
 
-        for (let row = 0; row < 17; row += 1) {
+        for (let row = 0; row < 10; row += 1) {
             const body = document.createElement('div');
             body.className = 'day-body';
             column.appendChild(body);
@@ -120,8 +152,9 @@ export function renderWeekly(container, monday, appState) {
     const { Calendar, Holidays, Designs } = appState.plannerData;
     const dayNames = Calendar.days;
     const monthNames = Calendar.month;
+    const themeDate = getWeekThemeDate(monday);
 
-    document.body.className = Designs.Themes[monday.getMonth() % Designs.Themes.length];
+    document.body.className = Designs.Themes[themeDate.getMonth() % Designs.Themes.length];
 
     container.innerHTML = `
         <main class="weekly-wrapper">
@@ -153,7 +186,12 @@ export function renderWeekly(container, monday, appState) {
                     <div class="weekly-todo-title">할 일 목록</div>
                     <div class="weekly-todo-rows"></div>
                 </aside>
+                <aside class="habit-tracker" aria-label="Habit tracker">
+                    <div class="habit-tracker-title">해빗 트래커</div>
+                    <div class="habit-tracker-rows"></div>
+                </aside>
                 <div class="weekly-grid" id="weekly-grid" aria-label="Weekly schedule"></div>
+                <div class="habit-grid" id="habit-grid" aria-label="Habit tracker grid"></div>
                 <div class="weekly-bottom-box" aria-label="Weekly notes"></div>
             </section>
         </main>
@@ -164,12 +202,14 @@ export function renderWeekly(container, monday, appState) {
     // 주/월과 무관하게 항상 같은 개수인 정적 반복 요소
     fillGaugeSegments(wrapper.querySelector('.month-gauge'));
     fillWeeklyTodoRows(wrapper.querySelector('.weekly-todo-rows'));
+    fillHabitTrackerRows(wrapper.querySelector('.habit-tracker-rows'));
+    fillHabitGrid(wrapper.querySelector('#habit-grid'));
     fillBottomBoxRows(wrapper.querySelector('.weekly-bottom-box'));
 
-    wrapper.querySelector('#week-title').textContent = `${monday.getFullYear()} ${monthNames[monday.getMonth()]}`;
+    wrapper.querySelector('#week-title').textContent = `${themeDate.getFullYear()} ${monthNames[themeDate.getMonth()]}`;
     wrapper.querySelector('#week-range').textContent = `${formatDate(monday)} - ${formatDate(addDays(monday, 6))}`;
     wrapper.querySelector('#week-number').textContent = getWeekNumber(monday);
-    updateGauge(wrapper, monday.getMonth());
+    updateGauge(wrapper, themeDate.getMonth());
     renderWeekDays(wrapper.querySelector('#weekly-grid'), monday, dayNames, Holidays);
 
     alignGridToMonthTitle(wrapper);

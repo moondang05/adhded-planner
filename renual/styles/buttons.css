@@ -20,6 +20,19 @@ button:hover {
     font-size: 5mm;
 }
 
+/* 사이드바 수정 버튼의 잠금 상태: additional 설정에서 포함되지 않은 항목은 상호작용 불가 */
+.action-btn:disabled {
+    background-color: var(--line-color);
+    opacity: 0.3;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.action-btn:disabled:hover {
+    transform: none;
+    box-shadow: none;
+}
+
 .main-footer button {
     border-radius: 10px;
     font-size: 4mm;

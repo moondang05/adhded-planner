@@ -39,6 +39,13 @@
     color: var(--bg-color);
 }
 
+/* additional 설정 완료 후 1번 표시: dashed 처리, 이후 계속 유지 */
+.circle-done {
+    background-color: transparent;
+    border: 0.4mm dashed var(--point-color);
+    color: var(--point-color);
+}
+
 .guide {
     display: flex;
     flex-direction: column;

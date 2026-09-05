@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="./styles/weekly.css">
     <link rel="stylesheet" href="./styles/daily.css">
     <link rel="stylesheet" href="./styles/print.css">
+    <link rel="stylesheet" href="./styles/modal.css">
 
     <!-- 시간 참조를 위한 호출 -->
     <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js"></script>
@@ -42,17 +43,17 @@
 
                 <span class="monthly option">
                     <p>Monthly</p>
-                    <button class="monthly action-btn">수정</button>
+                    <button class="monthly action-btn" disabled>수정</button>
                 </span>
 
                 <span class="weekly option">
                     <p>Weekly</p>
-                    <button class="weekly action-btn">수정</button>
+                    <button class="weekly action-btn" disabled>수정</button>
                 </span>
 
                 <span class="daily option">
                     <p>Daily</p>
-                    <button class="daily action-btn">수정</button>
+                    <button class="daily action-btn" disabled>수정</button>
                 </span>
 
             </div>
@@ -63,7 +64,7 @@
 
         <footer class="main-footer">
             <div>
-                <button class="action-btn">additional</button>
+                <button class="action-btn" id="additional-btn">additional</button>
             </div>
 
 
@@ -71,6 +72,49 @@
                 <button class="save-btn">check&save</button>
             </div>
         </footer>
+
+        <!--additional 버튼 클릭 시 표시되는 출력 설정 모달 (포함 항목 / 출력 범위 / 표지)-->
+        <div class="modal-overlay" id="additional-modal">
+            <div class="modal-panel">
+                <h3 class="modal-title">출력 설정</h3>
+
+                <div class="modal-section">
+                    <p class="modal-label">포함할 항목</p>
+                    <div class="toggle-group">
+                        <button type="button" class="toggle-btn" data-include="monthly">월간</button>
+                        <button type="button" class="toggle-btn" data-include="weekly">주간</button>
+                        <button type="button" class="toggle-btn" data-include="daily">일간</button>
+                    </div>
+                </div>
+
+                <div class="modal-section">
+                    <p class="modal-label">출력 범위</p>
+                    <div class="range-row">
+                        <label for="range-start">시작일</label>
+                        <input type="date" id="range-start">
+                    </div>
+                    <div class="range-row">
+                        <label for="range-end">종료일</label>
+                        <input type="date" id="range-end">
+                    </div>
+                </div>
+
+                <div class="modal-section">
+                    <p class="modal-label">표지 추가</p>
+                    <div class="cover-group">
+                        <button type="button" class="cover-btn" data-cover="none">없음</button>
+                        <button type="button" class="cover-btn" data-cover="design1">시안 1</button>
+                        <button type="button" class="cover-btn" data-cover="design2">시안 2</button>
+                        <button type="button" class="cover-btn" data-cover="design3">시안 3</button>
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="modal-cancel-btn">취소</button>
+                    <button type="button" class="modal-confirm-btn">확인</button>
+                </div>
+            </div>
+        </div>
     </main>
 
     <script type="module" src="./scripts/core/app.js"></script>

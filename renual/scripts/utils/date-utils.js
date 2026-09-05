@@ -33,5 +33,5 @@ export function toMonthName(date, data) {
 
 // data = calendar.json의 days 배열
 export function toDayName(date, data) {
-    return data[(date.getDate() + 6) % 7];
+    return data[(date.getDay() + 6) % 7];
 }
